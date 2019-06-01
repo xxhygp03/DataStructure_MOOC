@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct TreeNode *Tree;//¶¨ÒåTreeNodeµÄÖ¸Õë½ĞTree
+typedef struct TreeNode *Tree;//å®šä¹‰TreeNodeçš„æŒ‡é’ˆå«Tree
 struct TreeNode{
 	int v;
 	Tree Left, Right;
@@ -19,7 +19,7 @@ Tree NewNode(int V)
 
 Tree Insert(Tree T, int V)
 {
-	if (!T) T = NewNode(V);//Èç¹ûTÎªNULLÔòĞÂ½¨½Úµã
+	if (!T) T = NewNode(V);//å¦‚æœTä¸ºNULLåˆ™æ–°å»ºèŠ‚ç‚¹
 	else{
 		if (V > T->v)
 			T->Right = Insert(T->Right, V);
@@ -37,10 +37,10 @@ Tree MakeTree(int N)
 
 	b = 1;
 	T = NULL;
-	while (b){//·ÀÖ¹³öÏÖÏàÍ¬ÔªËØ
+	while (b){//é˜²æ­¢å‡ºç°ç›¸åŒå…ƒç´ 
 		printf("Please enter %d elements:\n", N);
 		for (i = 0; i < N; i++){
-			scanf_s("%d", &V);//ÊäÈëÔªËØ
+			scanf_s("%d", &V);//è¾“å…¥å…ƒç´ 
 			Vset[i] = V;
 		}
 
@@ -71,24 +71,24 @@ Tree MakeTree(int N)
 
 int check(Tree T, int V)
 {
-	if (T->flag){//ËùÔÚ½ÚµãÊÇÒÑ¾­¶Ô±ÈÇÒÍ¨¹ıµÄÔªËØ
+	if (T->flag){//æ‰€åœ¨èŠ‚ç‚¹æ˜¯å·²ç»å¯¹æ¯”ä¸”é€šè¿‡çš„å…ƒç´ 
 		if (V < T->v) return check(T->Left, V);
 		else if (V>T->v) return check(T->Right, V);
-		else return 0;//¼´³öÏÖÁËÒÑ¾­´æÔÚµÄÔªËØ£¬¾Í²»³É¶ş²æÊ÷ÁË£¬¿Ï¶¨·µ»Øfalse
+		else return 0;//å³å‡ºç°äº†å·²ç»å­˜åœ¨çš„å…ƒç´ ï¼Œå°±ä¸æˆäºŒå‰æ ‘äº†ï¼Œè‚¯å®šè¿”å›false
 	}
 	else{
 		if (V == T->v){
-			T->flag = 1;//µ±·¢ÏÖV³öÏÖÔÚÕıÈ·Î»ÖÃ£¬²»½öÒª·µ»Ø1£¬¶øÇÒÒªÔÚ±ê×¼Ê÷µÄÕâ¸öÎ»ÖÃ²åÆìÒÔ±ãcheckºóĞøÔªËØ
+			T->flag = 1;//å½“å‘ç°Vå‡ºç°åœ¨æ­£ç¡®ä½ç½®ï¼Œä¸ä»…è¦è¿”å›1ï¼Œè€Œä¸”è¦åœ¨æ ‡å‡†æ ‘çš„è¿™ä¸ªä½ç½®æ’æ——ä»¥ä¾¿checkåç»­å…ƒç´ 
 			return 1;
 		}
-		else return 0;//ÏàÓ¦Î»ÖÃÉÏµÄÔªËØ²»Ò»Ñù£¬·µ»Øfalse
+		else return 0;//ç›¸åº”ä½ç½®ä¸Šçš„å…ƒç´ ä¸ä¸€æ ·ï¼Œè¿”å›false
 	}
 }
 
 int Judge(Tree T, int N)
 {
-	int i, V, flag = 0;//flag==0´ú±íÄ¿Ç°»¹Ò»ÖÂ£¬1´ú±íÒÑ¾­²»Ò»ÖÂ£¨µ«»¹ÊÇÒªÔÊĞí°ÑÕû¸öÊı×éÊäÍê²Å·ûºÏ½»»¥Ï°¹ß£©
-						//£¨ºÍcheckÀïµÄflag²»Ò»»ØÊÂ£©
+	int i, V, flag = 0;//flag==0ä»£è¡¨ç›®å‰è¿˜ä¸€è‡´ï¼Œ1ä»£è¡¨å·²ç»ä¸ä¸€è‡´ï¼ˆä½†è¿˜æ˜¯è¦å…è®¸æŠŠæ•´ä¸ªæ•°ç»„è¾“å®Œæ‰ç¬¦åˆäº¤äº’ä¹ æƒ¯ï¼‰
+						//ï¼ˆå’Œchecké‡Œçš„flagä¸ä¸€å›äº‹ï¼‰
 	for (i = 0; i < N; i++){
 		scanf_s("%d", &V);
 		if ((!flag) && (!check(T, V))) flag = 1;
@@ -97,14 +97,14 @@ int Judge(Tree T, int N)
 	else return 1;
 }
 
-void ResetT(Tree T)// Çå³ıTÖĞ¸÷½áµãµÄflag±ê¼Ç
+void ResetT(Tree T)// æ¸…é™¤Tä¸­å„ç»“ç‚¹çš„flagæ ‡è®°
 {
 	if (T->Left) ResetT(T->Left);
 	if (T->Right) ResetT(T->Right);
 	T->flag = 0;
 }
 
-void FreeTree(Tree T)//ÊÍ·ÅTµÄ¿Õ¼ä
+void FreeTree(Tree T)//é‡Šæ”¾Tçš„ç©ºé—´
 {
 	if (T->Left) FreeTree(T->Left);
 	if (T->Right) FreeTree(T->Right);
@@ -117,20 +117,20 @@ int main()
 	Tree T;
 
 	printf("Please enter the number of elements (0 to exist): ");
-	scanf_s("%d", &N);//ÊäÈëµÚÒ»¿ÃÊ÷µÄÔªËØ¸öÊı
+	scanf_s("%d", &N);//è¾“å…¥ç¬¬ä¸€æ£µæ ‘çš„å…ƒç´ ä¸ªæ•°
 	while (N){
 		printf("Please enter the number of Trees to compare: ");
-		scanf_s("%d", &L);//ÊäÈëÒª¶Ô±ÈµÄÊ÷µÄ¸öÊı
-		T = MakeTree(N);//½¨Á¢±ê×¼Ê÷T
+		scanf_s("%d", &L);//è¾“å…¥è¦å¯¹æ¯”çš„æ ‘çš„ä¸ªæ•°
+		T = MakeTree(N);//å»ºç«‹æ ‡å‡†æ ‘T
 		for (i = 0; i < L; i++){
 			printf("Please enter No.%d array (%d totally):\n", i + 1, L);
 			if (Judge(T, N)) printf("Yes,they are same.\n");
 			else printf("No, they are different!\n");
-			ResetT(T);/*Çå³ıTÖĞµÄ±ê¼Çflag*/
+			ResetT(T);/*æ¸…é™¤Tä¸­çš„æ ‡è®°flag*/
 		}
-		FreeTree(T);//ÊÍ·Å±ê×¼Ê÷T
+		FreeTree(T);//é‡Šæ”¾æ ‡å‡†æ ‘T
 		printf("Please enter the number of elements (0 to exist): ");
-		scanf_s("%d", &N);//ÊäÈëÏÂÒ»¿ÃÊ÷µÄÔªËØ¸öÊı
+		scanf_s("%d", &N);//è¾“å…¥ä¸‹ä¸€æ£µæ ‘çš„å…ƒç´ ä¸ªæ•°
 	}
 	return 0;
 }
